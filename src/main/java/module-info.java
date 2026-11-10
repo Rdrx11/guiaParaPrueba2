@@ -4,7 +4,8 @@ module org.example.guiaparaprueba2 {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires com.google.gson;
 
-    opens org.example.guiaparaprueba2 to javafx.fxml;
+    opens org.example.guiaparaprueba2 to javafx.base, javafx.fxml, com.google.gson;
     exports org.example.guiaparaprueba2;
 }
