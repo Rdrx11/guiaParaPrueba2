@@ -5,16 +5,16 @@ public class CartasPokemonModel {
     private String NombreCarta;
     private int Ano;
     private int Cantidad;
-    private String Datos_especificos;
-    private int valor_estimado;
+    private String DatosEspecificos;
+    private int valorEstimado;
 
     public CartasPokemonModel(String categoria, String nombreCarta, int ano,int cantidad, String datos_especificos, int valor_estimado ){
         this.Categoria = categoria;
         this.NombreCarta = nombreCarta;
         this.Ano = ano;
         this.Cantidad = cantidad;
-        this.Datos_especificos = datos_especificos;
-        this.valor_estimado = valor_estimado;
+        this.DatosEspecificos = datos_especificos;
+        this.valorEstimado = valor_estimado;
     }
 
     public String getCategoria() {
@@ -49,24 +49,24 @@ public class CartasPokemonModel {
         Cantidad = cantidad;
     }
 
-    public String getDatos_especificos() {
-        return Datos_especificos;
+    public String getDatosEspecificos() {
+        return DatosEspecificos;
     }
 
-    public void setDatos_especificos(String datos_especificos) {
-        Datos_especificos = datos_especificos;
+    public void setDatosEspecificos(String datosEspecificos) {
+        DatosEspecificos = datosEspecificos;
     }
 
-    public int getValor_estimado() {
-        return valor_estimado;
+    public int getValorEstimado() {
+        return valorEstimado;
     }
 
-    public void setValor_estimado(int valor_estimado) {
-        this.valor_estimado = valor_estimado;
+    public void setValorEstimado(int valor_estimado) {
+        this.valorEstimado = valorEstimado;
     }
 
     @Override
     public String toString(){
-        return "[" + Categoria + "]" +  NombreCarta + "[" + Ano + "]" + Cantidad + "[" + Datos_especificos + "]" + valor_estimado;
+        return "[" + Categoria + "]" +  NombreCarta + "[" + Ano + "]" + Cantidad + "[" + DatosEspecificos + "]" + valorEstimado;
     }
 }

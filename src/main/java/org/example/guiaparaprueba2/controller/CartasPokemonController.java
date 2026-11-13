@@ -72,6 +72,12 @@ public class CartasPokemonController {
         SpinnerValueFactory<Integer> factoryCantidad =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 1);
         spinnerCantidad.setValueFactory(factoryCantidad);
+
+        botonRegistrar.disableProperty().bind(
+                campoNombreCarta.textProperty().isEmpty()
+                        .or(campoDatosEspecifico.textProperty().isEmpty())
+                        .or(campoValorEstimado.textProperty().isEmpty())
+        );
     }
 
    @FXML
@@ -81,18 +87,35 @@ public class CartasPokemonController {
        int ano = spinnerAno.getValue();
        int cantidad = spinnerCantidad.getValue();
        String datosEspecificos = campoDatosEspecifico.getText().trim();
-       int valorEstimado = Integer.parseInt(campoValorEstimado.getText().trim());
+
+       int valorEstimado;
+       try {
+           valorEstimado = Integer.parseInt(campoValorEstimado.getText().trim());
+           if (valorEstimado < 0) {
+               Notifications.create()
+                       .title("Valor inválido")
+                       .text("El valor estimado no puede ser negativo.")
+                       .showWarning();
+               return;
+           }
+       } catch (NumberFormatException e) {
+           Notifications.create()
+                   .title("Dato inválido")
+                   .text("Ingresa solo números enteros en el valor estimado.")
+                   .showWarning();
+           return;
+       }
+
 
        CartasPokemonModel nuevaCarta = new CartasPokemonModel(categoria, nombre, ano, cantidad, datosEspecificos, valorEstimado);
        CartasPokeObservableList.add(nuevaCarta);
-       try{
+       try {
            dao.guardar(new ArrayList<>(CartasPokeObservableList));
            Notifications.create()
                    .title("Registro exitoso")
-                   .text("Se guardo"+ nombre + "correctamente")
+                   .text("Se guardo" + nombre + "correctamente")
                    .showInformation();
-
-
+           limpiarFormulario();
        }catch(IOException ex){
            Notifications.create()
                    .title("ERROR DE GUARDADO")
@@ -102,4 +125,12 @@ public class CartasPokemonController {
        }
 
    }
+    private void limpiarFormulario() {
+        campoNombreCarta.clear();
+        campoDatosEspecifico.clear();
+        campoValorEstimado.clear();
+        comboCategoria.getSelectionModel().selectFirst();
+        spinnerAno.getValueFactory().setValue(2026);
+        spinnerCantidad.getValueFactory().setValue(1);
+    }
 }

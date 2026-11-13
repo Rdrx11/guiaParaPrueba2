@@ -5,12 +5,66 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.guiaparaprueba2.HelloController">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<HBox spacing="15.0" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.guiaparaprueba2.controller.CartasPokemonController">
+
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets top="15" right="15" bottom="15" left="15"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <!-- Panel Izquierdo: Formulario -->
+    <VBox spacing="12.0" prefWidth="260">
+        <Label text="CARTAS POKÉMON" styleClass="h3, text-primary, b"/>
+
+        <GridPane hgap="8" vgap="8">
+            <Label text="Categoría:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <ComboBox fx:id="comboCategoria" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="campoNombreCarta" promptText="Ej: Charizard" styleClass="form-control"
+                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Año:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Spinner fx:id="spinnerAno" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Cantidad:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Spinner fx:id="spinnerCantidad" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Datos Esp.:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="campoDatosEspecifico" promptText="Ej: Holo / Fuego" styleClass="form-control"
+                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="Valor ($):" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="campoValorEstimado" promptText="Ej: 15000" styleClass="form-control"
+                       GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        </GridPane>
+
+        <Button fx:id="botonRegistrar" text="Registrar Carta" styleClass="btn, btn-primary"
+                onAction="#onBotonRegistrarClick"/>
+    </VBox>
+
+    <!-- Panel Derecho: Tabla -->
+    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+        <Label text="Cartas Registradas:" styleClass="b"/>
+        <TableView fx:id="tablaCartasPokemon" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="75"/>
+                <TableColumn fx:id="colNombreCarta" text="Nombre" prefWidth="95"/>
+                <TableColumn fx:id="colAno" text="Año" prefWidth="50"/>
+                <TableColumn fx:id="colCantidad" text="Cant." prefWidth="45"/>
+                <TableColumn fx:id="colDatosEspecifico" text="Datos Específicos" prefWidth="105"/>
+                <TableColumn fx:id="colValorEstimado" text="Valor" prefWidth="65"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+</HBox>
