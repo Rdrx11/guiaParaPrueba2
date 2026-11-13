@@ -113,7 +113,7 @@ public class CartasPokemonController {
            dao.guardar(new ArrayList<>(CartasPokeObservableList));
            Notifications.create()
                    .title("Registro exitoso")
-                   .text("Se guardo" + nombre + "correctamente")
+                   .text("Se guardo " + nombre + " correctamente")
                    .showInformation();
            limpiarFormulario();
        }catch(IOException ex){
